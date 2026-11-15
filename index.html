@@ -112,7 +112,7 @@
                 hi uh, sup guys my name is teng and I do stupid engineering stuff for fun. 
                 Im a generalist ig, will add fun stuff later (note: I procrastinated for 3 months now leaving my domain to rot more and more, I also broke the backend even more TvT ).
             </div>
-            <span class="text">(I broke the backend cuz I just changed domain from tengy.site) also I havent finish this website yet, also just went to shenzhen hackathon :D</span>
+            <span class="text">(I broke the backend cuz I just changed domain from tengy.site) also I havent finish this website yet, got many more hackathon to come :D</span>
             <a class="contact-text" href="mailto:panyaongphichetmetha@gmail.com">contact me: panyaongphichetmetha@gmail.com (I won't bite)</a>
             <div class="stacked-links">
                 <a href="https://github.com/Tengyez">/cd github</a>
@@ -138,10 +138,10 @@
         crackSound.preload = 'auto';
 
         function playCrackSound() {
-            const a = crackSound.cloneNode(); // clone so overlapping clicks don't cut each other off
+            const a = crackSound.cloneNode(); 
             a.volume = 0.7;
-            a.playbackRate = 0.92 + Math.random() * 0.16; // slight variation so it's not identical every time
-            a.play().catch(() => {}); // browsers block audio before first user gesture, this just swallows that
+            a.playbackRate = 0.92 + Math.random() * 0.16; 
+            a.play().catch(() => {}); 
         }
 
         const canvas = document.getElementById('crack-canvas');
@@ -161,15 +161,14 @@
             return v + (Math.random() - 0.5) * amt;
         }
 
-        // draws one realistic, plaster-style crack: a meandering main line
-        // that tapers and occasionally throws off a short jagged fork
+
         function drawCrack(x, y, angle, steps, width) {
             let cx = x, cy = y, a = angle, w = width;
 
             for (let i = 0; i < steps; i++) {
                 const len = jit(16, 10);
                 a += jit(0, 0.45);
-                if (Math.random() < 0.12) a += jit(0, 1.1); // sharper kink, like real plaster
+                if (Math.random() < 0.12) a += jit(0, 1.1); 
 
                 const mx = jit(cx + Math.cos(a) * len * 0.5, len * 0.25);
                 const my = jit(cy + Math.sin(a) * len * 0.5, len * 0.25);
@@ -178,7 +177,6 @@
 
                 w = Math.max(0.35, w * (0.94 + Math.random() * 0.04));
 
-                // faint shadow pass underneath for depth, then the dark hairline on top
                 ctx.beginPath();
                 ctx.moveTo(cx, cy + 0.6);
                 ctx.quadraticCurveTo(mx, my + 0.6, nx, ny + 0.6);
@@ -193,7 +191,6 @@
                 ctx.lineWidth = w;
                 ctx.stroke();
 
-                // occasional short fork branching off the main crack
                 if (Math.random() < 0.1 && i > 2 && i < steps - 3) {
                     drawCrack(nx, ny, a + jit(0.9, 0.7) * (Math.random() < 0.5 ? 1 : -1), Math.floor(steps * 0.3), w * 0.6);
                 }
@@ -218,13 +215,12 @@
         }
 
         document.addEventListener('click', (e) => {
-            if (e.target.closest('a')) return; // don't fight real links
+            if (e.target.closest('a')) return; 
             shake();
             spawnCrackAt(e.clientX, e.clientY);
             playCrackSound();
         });
-
-        // scroll-driven flying cat with a rainbow trail, own original design
+\
         const nyanCanvas = document.getElementById('nyan-canvas');
         const nctx = nyanCanvas.getContext('2d');
 
@@ -246,7 +242,7 @@
             if (dist < 1) return;
             const angle = Math.atan2(dy, dx);
             const phase = Math.floor(Date.now() / 200) % rainbow.length;
-            const colors = rainbow.slice(phase).concat(rainbow.slice(0, phase)); // shimmer: colors march along the strip
+            const colors = rainbow.slice(phase).concat(rainbow.slice(0, phase)); 
             nctx.save();
             nctx.translate(sx, sy);
             nctx.rotate(angle);
@@ -304,12 +300,11 @@
 
             const now = Date.now();
             const margin = 60;
-            // one full flight cycle per ~1.3 screen-heights scrolled, then it loops, so
-            // scrolling past it just sends it on another lap instead of getting stuck
+         
             const cycleLen = window.innerHeight * 1.3;
             const t = (window.scrollY % cycleLen) / cycleLen;
 
-            // bottom-left to top-right, flying upward
+         
             const sx = -margin, sy = window.innerHeight + margin;
             const ex = window.innerWidth + margin, ey = -margin;
             const dirAngle = Math.atan2(ey - sy, ex - sx);
