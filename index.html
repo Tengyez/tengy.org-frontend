@@ -18,10 +18,12 @@
         .viewport-fixed {
             position: fixed;
             inset: 0;
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        /* NYAN CAT
         .scroll-spacer {
             height: 300vh;
         }
@@ -31,6 +33,7 @@
             z-index: 9999;
             pointer-events: none;
         }
+        */
         @keyframes shakeit {
             0% { transform: translate(0,0); }
             20% { transform: translate(-5px,3px) rotate(-0.3deg); }
@@ -43,7 +46,7 @@
         #crack-canvas {
             position: fixed;
             inset: 0;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
         }
         .header-container {
@@ -105,19 +108,19 @@
 </head>
 <body>
     <canvas id="crack-canvas"></canvas>
-    <canvas id="nyan-canvas"></canvas>
+    <!-- NYAN CAT <canvas id="nyan-canvas"></canvas> -->
     <div class="viewport-fixed">
         <div class="header-container">
             <div class="centered-text">
                 hi uh, sup guys my name is teng and I do stupid engineering stuff for fun. 
                 Im a generalist ig, will add fun stuff later (note: I procrastinated for 3 months now leaving my domain to rot more and more, I also broke the backend even more TvT ).
             </div>
-            <span class="text">(I broke the backend cuz I just changed domain from tengy.site) also I havent finish this website yet, got many more hackathon to come :D</span>
+            <span class="sub-text">(I broke the backend cuz I just changed domain from tengy.site) also I havent finish this website yet, got many more hackathon to come :D</span>
             <a class="contact-text" href="mailto:panyaongphichetmetha@gmail.com">contact me: panyaongphichetmetha@gmail.com (I won't bite)</a>
             <div class="stacked-links">
                 <a href="https://github.com/Tengyez">/cd github</a>
                 <a href="https://www.instagram.com/tengy_ez">/cd instagram</a>
-                 <a href="weekly-slop.html" class="btn">Click here for my weekly slop/project collection</a>
+                <a href="weekly-slop.html" class="btn">Click here for my weekly slop/project collection</a>
             </div>
         </div>
         <div class="bottom-right-wrapper">
@@ -132,7 +135,7 @@
         </div>
     </div>
 
-    <div class="scroll-spacer"></div>
+    <!-- NYAN CAT <div class="scroll-spacer"></div> -->
 
     <script>
         const crackSound = new Audio('crack.mp3');
@@ -147,6 +150,10 @@
 
         const canvas = document.getElementById('crack-canvas');
         const ctx = canvas.getContext('2d');
+        /* NYAN CAT
+        const nyanCanvas = document.getElementById('nyan-canvas');
+        const nctx = nyanCanvas.getContext('2d');
+        */
 
         function fitCanvas() {
             canvas.width = window.innerWidth * devicePixelRatio;
@@ -161,7 +168,6 @@
         function jit(v, amt) {
             return v + (Math.random() - 0.5) * amt;
         }
-
 
         function drawCrack(x, y, angle, steps, width) {
             let cx = x, cy = y, a = angle, w = width;
@@ -208,7 +214,8 @@
         }
 
         function shake() {
-            [canvas, nyanCanvas, document.querySelector('.viewport-fixed')].forEach(el => {
+            // [canvas, nyanCanvas, document.querySelector('.viewport-fixed')].forEach(el => {
+            [canvas, document.querySelector('.viewport-fixed')].forEach(el => {
                 el.classList.remove('shaking');
                 void el.offsetWidth;
                 el.classList.add('shaking');
@@ -221,10 +228,8 @@
             spawnCrackAt(e.clientX, e.clientY);
             playCrackSound();
         });
-\
-        const nyanCanvas = document.getElementById('nyan-canvas');
-        const nctx = nyanCanvas.getContext('2d');
 
+        /* NYAN CAT
         function fitNyan() {
             nyanCanvas.width = window.innerWidth * devicePixelRatio;
             nyanCanvas.height = window.innerHeight * devicePixelRatio;
@@ -305,7 +310,6 @@
             const cycleLen = window.innerHeight * 1.3;
             const t = (window.scrollY % cycleLen) / cycleLen;
 
-         
             const sx = -margin, sy = window.innerHeight + margin;
             const ex = window.innerWidth + margin, ey = -margin;
             const dirAngle = Math.atan2(ey - sy, ex - sx);
@@ -328,6 +332,7 @@
             requestAnimationFrame(updateNyan);
         }
         requestAnimationFrame(updateNyan);
+        */
     </script>
 </body>
 </html>
